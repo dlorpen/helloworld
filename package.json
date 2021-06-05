@@ -11,5 +11,8 @@
     "World"
   ],
   "author": "David Orpen",
-  "license": "SEE LICENSE IN license.txt"
+  "license": "SEE LICENSE IN license.txt",
+  "devDependencies": {
+    "electron": "^13.1.1"
+  }
 }
