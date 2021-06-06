@@ -1,4 +1,6 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, Menu } = require("electron");
+
+if (require("electron-squirrel-startup")) return app.quit();
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -10,6 +12,7 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+  Menu.setApplicationMenu(null);
   createWindow();
 
   app.on("activate", function () {
