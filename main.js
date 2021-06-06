@@ -12,7 +12,32 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  Menu.setApplicationMenu(null);
+  const isMac = process.platform === "darwin";
+  const template = [
+    {
+      label: "&File",
+      submenu: [isMac ? { role: "close" } : { role: "quit" }],
+    },
+    {
+      label: "&Help",
+      submenu: [
+        {
+          label: "About",
+          click: async () => {
+            const { dialog } = require("electron");
+            dialog.showMessageBox(null, {
+              message: "HelloWorld",
+              type: "info",
+              buttons: ["OK"],
+            });
+          },
+        },
+      ],
+    },
+  ];
+  const menu = Menu.buildFromTemplate(template);
+  Menu.setApplicationMenu(menu);
+
   createWindow();
 
   app.on("activate", function () {
