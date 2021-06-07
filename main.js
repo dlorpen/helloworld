@@ -20,11 +20,13 @@ function createWindow() {
 const openFile = async () => {
     try {
 	const { filePaths, canceled }
-	      = await dialog.showOpenDialog({ properties: ["openFile"]});
+	      = await dialog.showOpenDialog(
+		  { properties: ["openFile"] });
 	if (canceled)
 	    return;
 	const fileText
 	      = await readFile(filePaths[0], 'utf8');
+	win.currentFilePath = filePaths[0];
 	console.log(fileText);
     } catch (err) {
 	console.error(err);
@@ -32,18 +34,25 @@ const openFile = async () => {
 };
 
 const saveFile = async () => {
+    if (!win?.currentFilePath)
+	saveFileAs();
+    else
+	console.log(`Saving to file: ${win.currentFilePath}`);
+};
+
+const saveFileAs = async () => {
     try {
 	const { filePath, canceled }
-	      = await dialog.showSaveDialog({ });
+	      = await dialog.showSaveDialog(
+		  { properties: ["createDirectory"] });
 	if (canceled)
 	    return;
-	console.log(filePath);
+	win.currentFilePath = filePath;
+	saveFile();
     } catch (err) {
 	console.error(err);
     }
 };
-
-const saveFileAs = async () => {};
 
 const showHelpAbout = () => {
     dialog.showMessageBox(null, {
