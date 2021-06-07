@@ -16,7 +16,14 @@ app.whenReady().then(() => {
   const template = [
     {
       label: "&File",
-      submenu: [isMac ? { role: "close" } : { role: "quit" }],
+      submenu: [
+        { label: "&New", click: async () => createWindow() },
+        { label: "&Open" },
+        { label: "&Save" },
+        { label: "Save &As" },
+        { type: "separator" },
+        isMac ? { role: "close" } : { role: "quit" },
+      ],
     },
     {
       label: "&Help",
