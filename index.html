@@ -4,6 +4,7 @@
     <title>Hello World!</title>
     <link rel="stylesheet" href="./w3.css" />
     <link rel="stylesheet" href="./textarea.css" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
   </head>
   <body>
     <div class="box">
@@ -13,11 +14,12 @@
       <form class="row content w3-panel w3-blue">
         <div class="box">
           <textarea
-            class="row content w3-input"
-            style="resize: none"
+            id="userText"
+            class="row content w3-input unresizable"
           ></textarea>
         </div>
       </form>
     </div>
   </body>
+  <script src="./renderer.js"></script>
 </html>
