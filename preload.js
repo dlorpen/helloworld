@@ -10,5 +10,3 @@ const addRendererListener = (channel, listener) => {
 
 contextBridge.exposeInMainWorld("sendRendererMessage", sendRendererMessage);
 contextBridge.exposeInMainWorld("addRendererListener", addRendererListener);
-
-console.log("Preload script has run");

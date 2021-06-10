@@ -1,10 +1,14 @@
 const textArea = document.querySelector("#userText");
 textArea.value = "Loaded script";
 
-console.log(window.addRendererListener);
-
 window.addRendererListener("loadFile", (event, args) => {
   textArea.value = args;
-  console.log(event);
-  console.log(args);
+});
+
+window.addRendererListener("saveFile", (event, args) => {
+    console.log(args);
+    const result = [{ filePath: args, fileText: textArea.value}];
+    console.log(result);
+    window.sendRendererMessage("fileContents",
+			       result);
 });
