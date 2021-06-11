@@ -1,4 +1,9 @@
-const { openFile, saveFile, saveFileAs, showHelpAbout } = require("./dialogFunctions");
+const {
+  openFile,
+  saveFile,
+  saveFileAs,
+  showHelpAbout,
+} = require("./dialogFunctions");
 const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 
