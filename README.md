@@ -1,5 +1,7 @@
 # Hello World
 
+![Image](./bonjour.png)
+
 This was supposed to be a Hello World electron app - just following the tutorial at [electronjs.org](https://www.electronjs.org/docs/latest/get-started/quick-start) but... it grew to be a tiny bit more than that.
 
 This app now demonstrates:
