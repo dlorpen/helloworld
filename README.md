@@ -4,7 +4,7 @@
 
 This was supposed to be a Hello World electron app - just following the tutorial at [electronjs.org](https://www.electronjs.org/docs/latest/get-started/quick-start) but... it grew to be a tiny bit more than that.
 
-This app now demonstratesa very basic cross platform text-editor:
+This app now demonstrates a very basic cross platform text-editor:
 
 - Creating a basic electron app with main, renderer and preload scripts
 - Interacting with the file system
