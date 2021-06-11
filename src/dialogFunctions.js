@@ -27,7 +27,7 @@ const openFile = async (win) => {
 const saveFile = async (win) => {
   try {
     if (!win.currentFilePath) {
-      saveFileAs();
+      saveFileAs(win);
     } else {
       console.log(`Saving to file: ${win.currentFilePath}`);
       ipcMain.once("fileContents", (event, args) =>
@@ -47,7 +47,7 @@ const saveFileAs = async (win) => {
     });
     if (canceled) return;
     win.currentFilePath = filePath;
-    await saveFile(win);
+    saveFile(win);
   } catch (err) {
     console.error(err);
   }
