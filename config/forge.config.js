@@ -1,6 +1,6 @@
 const path = require("path");
 
-const iconpath = path.join(__dirname, "icons", "icon");
+const iconpath = path.join(__dirname, "..", "assets", "icons", "icon");
 
 module.exports = {
   packagerConfig: {
