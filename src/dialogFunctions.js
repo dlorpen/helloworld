@@ -10,55 +10,55 @@ const saveText = async (filePath, fileText) => {
   }
 };
 
-module.exports = {
-  openFile: async (win) => {
-    try {
-      const { filePaths, canceled } = await dialog.showOpenDialog({
-        properties: ["openFile"],
-      });
-      if (canceled) return;
-      const fileText = await readFile(filePaths[0], "utf8");
-      win.currentFilePath = filePaths[0];
-      win.webContents.send("loadFile", fileText);
-    } catch (err) {
-      console.error(err);
-    }
-  },
-
-  saveFile: async (win) => {
-    try {
-      if (!win.currentFilePath) {
-        saveFileAs();
-      } else {
-        console.log(`Saving to file: ${win.currentFilePath}`);
-        ipcMain.once("fileContents", (event, args) =>
-          saveText(args[0].filePath, args[0].fileText)
-        );
-        win.webContents.send("saveFile", win.currentFilePath);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  },
-
-  saveFileAs: async (win) => {
-    try {
-      const { filePath, canceled } = await dialog.showSaveDialog({
-        properties: ["createDirectory"],
-      });
-      if (canceled) return;
-      win.currentFilePath = filePath;
-      saveFile();
-    } catch (err) {
-      console.error(err);
-    }
-  },
-
-  showHelpAbout: async () => {
-    dialog.showMessageBox(null, {
-      message: "HelloWorld",
-      type: "info",
-      buttons: ["OK"],
+const openFile = async (win) => {
+  try {
+    const { filePaths, canceled } = await dialog.showOpenDialog({
+      properties: ["openFile"],
     });
-  },
+    if (canceled) return;
+    const fileText = await readFile(filePaths[0], "utf8");
+    win.currentFilePath = filePaths[0];
+    win.webContents.send("loadFile", fileText);
+  } catch (err) {
+    console.error(err);
+  }
 };
+
+const saveFile = async (win) => {
+  try {
+    if (!win.currentFilePath) {
+      saveFileAs();
+    } else {
+      console.log(`Saving to file: ${win.currentFilePath}`);
+      ipcMain.once("fileContents", (event, args) =>
+        saveText(args[0].filePath, args[0].fileText)
+      );
+      win.webContents.send("saveFile", win.currentFilePath);
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const saveFileAs = async (win) => {
+  try {
+    const { filePath, canceled } = await dialog.showSaveDialog({
+      properties: ["createDirectory"],
+    });
+    if (canceled) return;
+    win.currentFilePath = filePath;
+    await saveFile(win);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const showHelpAbout = async () => {
+  dialog.showMessageBox(null, {
+    message: "HelloWorld",
+    type: "info",
+    buttons: ["OK"],
+  });
+};
+
+module.exports = { openFile, saveFile, saveFileAs, showHelpAbout };
