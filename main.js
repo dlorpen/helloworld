@@ -23,7 +23,6 @@ function createWindow() {
       sandbox: true,
     },
   });
-  win.webContents.openDevTools();
 
   win.loadFile("index.html");
 
