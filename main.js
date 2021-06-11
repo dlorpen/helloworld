@@ -44,27 +44,28 @@ const openFile = async () => {
 };
 
 const saveText = async (filePath, fileText) => {
-    try {
-	const result = await writeFile(filePath, fileText);
-	if (result !== undefined)
-	    throw new Error("File write did not succeed");
-    } catch (err) {
-	console.error(err);
-    }
+  try {
+    const result = await writeFile(filePath, fileText);
+    if (result !== undefined) throw new Error("File write did not succeed");
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const saveFile = async () => {
-    try {
+  try {
     if (!win.currentFilePath) {
-	saveFileAs();
+      saveFileAs();
     } else {
-	console.log(`Saving to file: ${win.currentFilePath}`);
-	ipcMain.once("fileContents", (event, args) => saveText(args[0].filePath, args[0].fileText));
-	win.webContents.send("saveFile", win.currentFilePath);
+      console.log(`Saving to file: ${win.currentFilePath}`);
+      ipcMain.once("fileContents", (event, args) =>
+        saveText(args[0].filePath, args[0].fileText)
+      );
+      win.webContents.send("saveFile", win.currentFilePath);
     }
-    } catch (err) {
-	console.error(err);
-    }
+  } catch (err) {
+    console.error(err);
+  }
 };
 
 const saveFileAs = async () => {
