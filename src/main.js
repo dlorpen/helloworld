@@ -24,7 +24,7 @@ function createWindow() {
     },
   });
 
-  win.loadFile("index.html");
+  win.loadFile("./src/index.html");
 
   oldWin?.destroy();
 }
