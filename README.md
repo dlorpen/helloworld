@@ -8,6 +8,7 @@ This app now demonstrates a very basic cross platform text-editor:
 
 - Creating a basic electron app with main, renderer and preload scripts
 - Displaying an HTML GUI interface with CSS styling
+- Displaying native menus
 - Interacting with the file system
   - Displaying native file dialogs
   - Reading from and writing to text files
